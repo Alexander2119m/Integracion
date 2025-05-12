@@ -86,8 +86,8 @@ spec:
       uri: 'https://github.com/Alexander2119m/Integracion'
     contextDir: /
   strategy:
-    type: Source
-    sourceStrategy:
+    type: Docker
+    dockerStrategy:
       from:
         kind: ImageStreamTag
         namespace: openshift
