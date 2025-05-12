@@ -1,0 +1,111 @@
+﻿kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: integracion
+  namespace: suaresalex419-dev
+  uid: 7c30be03-8da2-4797-9529-60c9dea86825
+  resourceVersion: '1872400846'
+  generation: 2
+  creationTimestamp: '2025-05-12T03:31:08Z'
+  labels:
+    app: integracion
+    app.kubernetes.io/component: integracion
+    app.kubernetes.io/instance: integracion
+    app.kubernetes.io/name: integracion
+    app.kubernetes.io/part-of: integracion-app
+    app.openshift.io/runtime: nodejs
+    app.openshift.io/runtime-version: 20-minimal-ubi8
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/Alexander2119m/Integracion'
+    openshift.io/generated-by: OpenShiftWebConsole
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2025-05-12T03:31:08Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.kubernetes.io/part-of': {}
+            'f:app.openshift.io/runtime': {}
+            'f:app.openshift.io/runtime-version': {}
+        'f:spec':
+          'f:output':
+            'f:to': {}
+          'f:runPolicy': {}
+          'f:source':
+            'f:contextDir': {}
+            'f:git':
+              .: {}
+              'f:uri': {}
+            'f:type': {}
+          'f:strategy':
+            'f:sourceStrategy':
+              .: {}
+              'f:from': {}
+            'f:type': {}
+          'f:triggers': {}
+    - manager: openshift-apiserver
+      operation: Update
+      apiVersion: build.openshift.io/v1
+      time: '2025-05-12T03:31:08Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:imageChangeTriggers': {}
+          'f:lastVersion': {}
+spec:
+  triggers:
+    - type: Generic
+      generic:
+        secretReference:
+          name: integracion-generic-webhook-secret
+    - type: GitHub
+      github:
+        secretReference:
+          name: integracion-github-webhook-secret
+    - type: ImageChange
+      imageChange: {}
+    - type: ConfigChange
+  runPolicy: Serial
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/Alexander2119m/Integracion'
+    contextDir: /
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'nodejs:20-minimal-ubi8'
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'integracion:latest'
+  resources: {}
+  postCommit: {}
+  nodeSelector: null
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+status:
+  lastVersion: 1
+  imageChangeTriggers:
+    - lastTriggeredImageID: 'image-registry.openshift-image-registry.svc:5000/openshift/nodejs@sha256:9a35befac328e6af8247d94c64e2b9ff634f0bb9981d6a161c855df8d0642640'
+      from:
+        namespace: openshift
+        name: 'nodejs:20-minimal-ubi8'
+      lastTriggerTime: '2025-05-12T03:31:08Z'
