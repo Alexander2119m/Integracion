@@ -4,7 +4,7 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-  res.send('¡Prueba para determinar si funciona !');
+  res.send('Integracion de sistemas y plataformas !');
 });
 
 const PORT = process.env.PORT || 8080;
